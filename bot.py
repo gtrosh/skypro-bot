@@ -1,18 +1,18 @@
 from telegram import Update
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 from quiz import questions, answers
 
 user_answers = {}
 
 
-def hello(update: Update) -> None:
+def hello(update: Update, context: CallbackContext) -> None:
     username = update.effective_user.first_name
 
     user_answers[username] = []
     update.message.reply_text(questions[0])
 
 
-def quiz(update: Update) -> None:
+def quiz(update: Update, context: CallbackContext) -> None:
     username = update.effective_user.first_name
 
     if username in user_answers:
